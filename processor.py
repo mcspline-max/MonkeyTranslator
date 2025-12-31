@@ -2,9 +2,13 @@ import os
 import shutil
 import json
 import time
-import ssl # <--- Added this import
+import ssl
+import warnings
 from pathlib import Path
 from PIL import Image
+
+# --- SILENCE WARNINGS ---
+warnings.filterwarnings("ignore", message=".*pin_memory.*") 
 
 try:
     import easyocr
@@ -75,6 +79,14 @@ class GeminiProcessor:
         new_album = gallery.CreateGalleryStillAlbum()
         gallery.SetAlbumName(new_album, album_name)
         return new_album
+
+    # --- TRACK HELPER (NEW) ---
+    def _ensure_track_2_exists(self):
+        """Checks if V2 exists, creates it if not."""
+        track_count = self.tl.GetTrackCount("video")
+        if track_count < 2:
+            print("Creating Video Track 2...")
+            self.tl.AddTrack("video")
 
     # --- BATCH WORKFLOW ---
     def grab_stills(self):
@@ -223,6 +235,10 @@ class GeminiProcessor:
         target_clip = next((c for c in clips if c.GetName() == f"GEMINI_{base_name}.jpg"), None)
         
         if target_clip:
+            # --- FIX: ENSURE TRACK 2 EXISTS ---
+            self._ensure_track_2_exists()
+            # ----------------------------------
+
             fps = float(self.tl.GetSetting("timelineFrameRate"))
             try:
                 h, m, s, f = map(int, rec_tc.split(':'))
@@ -238,40 +254,29 @@ class GeminiProcessor:
                 'startFrame': 0,
                 'endFrame': dur_int,
                 'recordFrame': rec_frame,
-                'trackIndex': 2,
+                'trackIndex': 2, # Now guaranteed to exist
                 'mediaType': 1 
             }])
             
-            return True, "Single clip processed (4K) and appended."
+            return True, "Single clip processed (4K) and appended to Track 2."
         
         return False, "Import failed."
 
     # --- OCR HELPERS ---
     def init_ocr(self, lang):
-        """Initializes the OCR reader with an SSL bypass for Mac."""
         if not self.reader:
             print(f"Loading OCR Model ({lang})...")
-            
-            # --- MAC SSL FIX START ---
-            # This forces Python to ignore SSL errors when downloading the model
+            # SSL Fix for Mac
             try:
                 _create_unverified_https_context = ssl._create_unverified_context
-            except AttributeError:
-                pass
-            else:
-                ssl._create_default_https_context = _create_unverified_https_context
-            # --- MAC SSL FIX END ---
+            except AttributeError: pass
+            else: ssl._create_default_https_context = _create_unverified_https_context
 
-            # Auto GPU detection
             gpu_enable = False
             try:
                 import torch
-                if torch.cuda.is_available():
-                    print("Using CUDA (NVIDIA) GPU")
-                    gpu_enable = True
-                elif torch.backends.mps.is_available():
-                    print("Using MPS (Mac Metal) GPU")
-                    gpu_enable = True
+                if torch.cuda.is_available(): gpu_enable = True
+                elif torch.backends.mps.is_available(): gpu_enable = True
             except: pass
 
             self.reader = easyocr.Reader([lang], gpu=gpu_enable)
@@ -341,7 +346,6 @@ class GeminiProcessor:
             response = self.client.models.generate_content(
                 model="gemini-3-pro-image-preview", 
                 contents=[prompt, img],
-                # --- HD CONFIG (BATCH) ---
                 config=types.GenerateContentConfig(
                     response_modalities=["TEXT", "IMAGE"],
                     image_config=types.ImageConfig(image_size="4K")
@@ -387,6 +391,10 @@ class GeminiProcessor:
         fps = float(self.tl.GetSetting("timelineFrameRate"))
         append_data = []
         
+        # --- FIX: ENSURE TRACK 2 EXISTS (BATCH) ---
+        self._ensure_track_2_exists()
+        # ------------------------------------------
+
         for item in data_map:
             gemini_name = f"GEMINI_{Path(item['name']).stem}.jpg"
             target_clip = next((c for c in clips if c.GetName() == gemini_name), None)
@@ -402,7 +410,7 @@ class GeminiProcessor:
                 
                 append_data.append({
                     'mediaPoolItem': target_clip,
-                    'timeline': self.tl,
+                    'timeline': self.tl, 
                     'startFrame': 0,
                     'endFrame': dur_int,
                     'recordFrame': rec_frame,
