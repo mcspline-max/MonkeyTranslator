@@ -27,14 +27,14 @@
 ## 📥 Installation
 
 ### 🍎 MacOS
-1.  Download the **`MonkeyTranslator_Mac_Installer.command`** from the [Releases page](#).
+1.  Download the **`MonkeyTranslator_Mac_Installer.command`** from the Releases Page: https://github.com/mcspline-max/MonkeyTranslator/releases
 2.  Open a terminal and type `chmod +x` and drag and drop the file you downloaded in terminal window, then press Enter
 3.  Type: `sudo` and **drag and drop the file you downloaded** in terminal window, then press **Enter**.
 4.  Wait for the installation process to finish
 5.  Restart Resolve.
 
 ### 🪟 Windows
-1.  Download the **`MonkeyTranslator_Windows_Installer.zip`** from the [Releases page](#).
+1.  Download the **`MonkeyTranslator_Windows_Installer.zip`** from the Releases Page: https://github.com/mcspline-max/MonkeyTranslator/releases
 2.  Unzip the file.
 3.  Double-click `Install Monkey (Windows).bat`.
 4.  If prompted by UAC, click **Yes** to run as Administrator.
