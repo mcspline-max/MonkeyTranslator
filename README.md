@@ -1,9 +1,3 @@
-Here is a professional, complete **README.md** for your project. You can copy and paste this directly into your GitHub repository.
-
-I have structured it to be user-friendly, covering installation, usage, and troubleshooting, specifically addressing the MacOS security quirks and the DaVinci Resolve settings we debugged.
-
-***
-
 # 🐒 Monkey Translator for DaVinci Resolve
 
 **Monkey Translator** is a powerful Workflow Integration plugin for DaVinci Resolve Studio & Free. It uses **Google Gemini 3.0 AI** to automatically detect text in your video frames, translate it (or modify it based on your instructions), and seamlessly import the translated images back into your timeline.
