@@ -85,12 +85,9 @@ Before running the script, you **must** enable external scripting in DaVinci Res
 *   Did you restart Resolve after installing?
 *   Did you set "External scripting using" to **Local** in Preferences? (See Initial Setup above).
 
-**MacOS: "App cannot be opened because it is from an unidentified developer"**
-*   You double-clicked the installer. You must **Right-Click** the installer and choose **Open**, then click **Open** again in the popup.
-
 **Script opens and closes immediately**
 *   Ensure Python is installed on your computer. Open a terminal/command prompt and type `python --version` to check.
-
+  
 ---
 
 ## 📜 License
