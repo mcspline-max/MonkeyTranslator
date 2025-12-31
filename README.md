@@ -34,12 +34,11 @@
 5.  Restart Resolve.
 
 ### 🪟 Windows
-1.  Download the **`MonkeyTranslator_Windows_Installer.zip`** from the Releases Page: https://github.com/mcspline-max/MonkeyTranslator/releases
-2.  Unzip the file.
-3.  Double-click `Install Monkey (Windows).bat`.
-4.  If prompted by UAC, click **Yes** to run as Administrator.
-5.  Wait for the installation to finish.
-
+1.  Download the **`Windows - Monkey Translator Installer V1.0.bat`** from the Releases Page: https://github.com/mcspline-max/MonkeyTranslator/releases
+2.  Double-click `Windows - Monkey Translator Installer V1.0.bat`.
+3.  If prompted by UAC, click **Yes** to run as Administrator.
+4.  Wait for the installation to finish.
+5.  Restarts Resolve.
 ---
 
 ## ⚙️ Initial Setup (Crucial Step)
