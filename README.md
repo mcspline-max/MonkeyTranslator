@@ -1,6 +1,6 @@
 # 🐒 Monkey Translator for DaVinci Resolve
 
-**Monkey Translator** is a powerful Workflow Integration plugin for DaVinci Resolve Studio & Free. It uses **Google Gemini 3.0 AI** to automatically detect text in your video frames, translate it (or modify it based on your instructions), and seamlessly import the translated images back into your timeline.
+**Monkey Translator** is a powerful editing Script for DaVinci Resolve Studio & Free. It uses **Google Gemini 3.0 AI** to automatically detect text in your video frames, translate it (or modify it based on your instructions), and seamlessly import the translated images back into your timeline.
 
 ---
 
@@ -27,13 +27,19 @@
 ## 📥 Installation
 
 ### 🍎 MacOS
+
 1.  Download the **`MonkeyTranslator_Mac_Installer.zip`** from the [Releases page](#).
 2.  Unzip the file.
-3.  **Right-Click** (Control+Click) on `Install Monkey.command`.
-4.  Select **Open**.
-    *   ⚠️ **Important:** Do not just double-click. macOS will block it. You **must** Right-Click -> Open to bypass the security check.
-5.  A terminal will open. Enter your Mac login password (you won't see typing) and press Enter.
-6.  Wait for the "Installation Successful" message.
+3.  Open the **Terminal** app (Press `Cmd` + `Space`, type "Terminal", and hit Enter).
+4.  **Fix Permissions:**
+    *   Type `chmod +x ` (make sure there is a space after the x).
+    *   **Drag and drop** the `Install Monkey.command` file into the Terminal window.
+    *   Press **Enter**.
+5.  **Run Installer:**
+    *   **Drag and drop** the `Install Monkey.command` file into the Terminal window again.
+    *   Press **Enter**.
+6.  You will be prompted to enter your Mac login password. Type it (you won't see the characters appearing) and press **Enter**.
+7.  Wait for the "Installation Successful" message.
 
 ### 🪟 Windows
 1.  Download the **`MonkeyTranslator_Windows_Installer.zip`** from the [Releases page](#).
@@ -44,9 +50,9 @@
 
 ---
 
-## ⚙️ Initial Setup (Crucial Step)
+## ⚙️ Initial Setup(Recommended)
 
-Before running the script, you **must** enable external scripting in DaVinci Resolve, or the plugin will fail to connect.
+Before running the script, you **might need to** enable external scripting in DaVinci Resolve, or the plugin will could fail to connect.
 
 1.  Open **DaVinci Resolve**.
 2.  Go to the menu: **DaVinci Resolve** > **Preferences**.
@@ -70,15 +76,15 @@ Before running the script, you **must** enable external scripting in DaVinci Res
     *   *Default:* "Detect text, translate to French contextually..."
     *   *Example:* "Replace text with 'CENSORED'"
 
-### ⚡ Mode A: Instant Single Clip
-1.  Place your playhead over a clip in the timeline.
-2.  Click **"⚡ Process Current Clip (Instant)"**.
-3.  The script will grab the frame, send it to AI, and place the result on **Video Track 2**.
-
-### 📦 Mode B: Batch Workflow
+### 📦 Mode A: Batch Workflow
 1.  Click **"1. Analyze & OCR"**: Scans the whole timeline for text.
 2.  Click **"2. Generate Translation"**: Sends all detected images to Gemini AI.
 3.  Click **"3. Import to Timeline"**: Imports all generated images and places them in sync on Video Track 2.
+
+### ⚡ Mode B: Instant Single Clip
+1.  Place your playhead over a clip in the timeline.
+2.  Click **"⚡ Process Current Clip (Instant)"**.
+3.  The script will grab the frame, send it to AI, and place the result on **Video Track 2**.
 
 ---
 
@@ -87,9 +93,6 @@ Before running the script, you **must** enable external scripting in DaVinci Res
 **"Could not connect to DaVinci Resolve"**
 *   Did you restart Resolve after installing?
 *   Did you set "External scripting using" to **Local** in Preferences? (See Initial Setup above).
-
-**MacOS: "App cannot be opened because it is from an unidentified developer"**
-*   You double-clicked the installer. You must **Right-Click** the installer and choose **Open**, then click **Open** again in the popup.
 
 **Script opens and closes immediately**
 *   Ensure Python is installed on your computer. Open a terminal/command prompt and type `python --version` to check.
