@@ -35,7 +35,7 @@ class GeminiProcessor:
         raw_name = self.tl.GetName() if self.tl else "Untitled"
         self.tl_name = "".join([c for c in raw_name if c.isalnum() or c in (' ', '-', '_')]).strip()
         
-        self.base_dir = Path.home() / "Documents" / "Resolve_Gemini_Translator"
+        self.base_dir = Path.home() / "Documents" / "Monkey Translator"
         self.work_dir = self.base_dir / self.tl_name
         
         self.paths = {
