@@ -27,13 +27,11 @@
 ## 📥 Installation
 
 ### 🍎 MacOS
-1.  Download the **`MonkeyTranslator_Mac_Installer.zip`** from the [Releases page](#).
-2.  Unzip the file.
-3.  **Right-Click** (Control+Click) on `Install Monkey.command`.
-4.  Select **Open**.
-    *   ⚠️ **Important:** Do not just double-click. macOS will block it. You **must** Right-Click -> Open to bypass the security check.
-5.  A terminal will open. Enter your Mac login password (you won't see typing) and press Enter.
-6.  Wait for the "Installation Successful" message.
+1.  Download the **`MonkeyTranslator_Mac_Installer.command`** from the [Releases page](#).
+2.  Open a terminal and type `chmod +x` and drag and drop the file you downloaded in terminal window, then press Enter
+3.  Type: `sudo` and **drag and drop the file you downloaded** in terminal window, then press **Enter**.
+4.  Wait for the installation process to finish
+5.  Restart Resolve.
 
 ### 🪟 Windows
 1.  Download the **`MonkeyTranslator_Windows_Installer.zip`** from the [Releases page](#).
