@@ -18,7 +18,7 @@ REPO_NAME   = "MonkeyTranslator"
 BRANCH      = "main"               
 
 PLUGIN_FOLDER_NAME = "MonkeyTranslator" 
-FILES_TO_DEPLOY = ["main.py", "processor.py", "config.json"]
+FILES_TO_DEPLOY = ["Monkey Translator.py", "processor.py", "config.json"]
 
 REQUIRED_PACKAGES = ["easyocr", "google-genai", "Pillow"]
 # =============================================================================
