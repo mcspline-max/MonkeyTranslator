@@ -343,26 +343,31 @@ class GeminiProcessor:
 
         try:
             img = Image.open(src_path)
-            response = client.models.generate_content(
+            
+            # Updated to use Gemini 2.5 Flash based on your documentation
+            response = self.client.models.generate_content(
                 model="gemini-2.5-flash-image",
-                contents=[prompt, image],
+                contents=[prompt, img],
             )
             
-            
+            # Processing the response
             if response.parts:
                 for part in response.parts:
+                    # Prioritize inline_data (Image)
                     if part.inline_data:
                         gen_img = part.as_image()
                         save_name = f"GEMINI_{Path(img_name).stem}.jpg"
                         save_path = self.paths["RECEIVED"] / save_name
                         gen_img.save(save_path)
                         
+                        # Your existing metadata cleaning logic
                         clean_img = Image.open(save_path)
                         data = list(clean_img.getdata())
                         final_img = Image.new(clean_img.mode, clean_img.size)
                         final_img.putdata(data)
                         final_img.save(save_path)
                         return True
+                        
             time.sleep(1)
             return False
         except Exception as e:
