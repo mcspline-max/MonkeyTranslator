@@ -348,7 +348,7 @@ class GeminiProcessor:
                 contents=[prompt, img],
                 config=types.GenerateContentConfig(
                     response_modalities=["TEXT", "IMAGE"],
-                    image_config=types.ImageConfig(image_size="4K")
+                    image_config=types.ImageConfig(image_size="1K")
                 )
             )
             
