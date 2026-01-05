@@ -201,7 +201,18 @@ def show_window():
         user_text = itm['PromptInput'].PlainText
         if user_text and user_text.strip():
             return user_text.strip()
-        return "Detect text, translate to French contextually. Keep aspect ratio. No verbose."
+        prompt = (
+            "Perform a realistic text replacement. Detect all text in this image and "
+            "translate it into French. \n"
+            "REQUIREMENTS:\n"
+            "1. Replace the text in-place. strictly matching the original font style, "
+            "size, color, weight, and perspective/orientation.\n"
+            "2. Seamlessly reconstruct the background behind the new text (inpainting) "
+            "so it looks like the original design.\n"
+            "3. Do not alter any non-text visual elements, characters, or the aspect ratio.\n"
+            "4. Output ONLY the resulting image."
+        )
+        return prompt
 
     # --- MAIN LOOP ---
     def process_next_step(ev):
