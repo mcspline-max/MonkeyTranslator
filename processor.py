@@ -343,14 +343,11 @@ class GeminiProcessor:
 
         try:
             img = Image.open(src_path)
-            response = self.client.models.generate_content(
-                model="gemini-3-pro-image-preview", 
-                contents=[prompt, img],
-                config=types.GenerateContentConfig(
-                    response_modalities=["TEXT", "IMAGE"],
-                    image_config=types.ImageConfig(image_size="1K")
-                )
+            response = client.models.generate_content(
+                model="gemini-2.5-flash-image",
+                contents=[prompt, image],
             )
+            
             
             if response.parts:
                 for part in response.parts:
